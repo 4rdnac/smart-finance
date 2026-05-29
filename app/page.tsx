@@ -227,8 +227,7 @@ export default function Home() {
 
     const q = query(
       collection(db, "transactions"),
-      where("userId", "==", user.uid),
-      orderBy("tanggal", "desc")
+      where("userId", "==", user.uid)
     );
 
     const unsubscribe = onSnapshot(q, (snapshot) => {
@@ -244,6 +243,14 @@ export default function Home() {
           tanggal: d.tanggal
         });
       });
+
+      // Sort client-side by date descending to prevent Firestore prerequisite check / composite index error
+      dbTxs.sort((a, b) => {
+        const dateCompare = b.tanggal.localeCompare(a.tanggal);
+        if (dateCompare !== 0) return dateCompare;
+        return b.id.localeCompare(a.id);
+      });
+
       setTransactions(dbTxs);
       setIsDbLoading(false);
     }, (err) => {
