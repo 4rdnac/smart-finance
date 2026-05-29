@@ -1,0 +1,8 @@
+{
+  "name": "Pencatat Keuangan",
+  "description": "Asisten pencatat keuangan cerdas berbasis AI pintar dengan integrasi sinkronisasi cloud Firebase Firestore secara aman.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
